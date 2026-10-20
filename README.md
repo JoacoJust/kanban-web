@@ -192,8 +192,9 @@ Con ambas URLs publicadas y registradas en la tabla de arriba:
 
 ## Criterios de aceptación
 
-Implementados CA-01 a CA-17. **CA-18 queda pendiente** hasta publicar frontend y
-backend (requiere credenciales de Render y Atlas).
+Implementados CA-01 a CA-17 (CA-16 requiere una pasada visual final en un
+dispositivo real). **CA-18 queda pendiente** hasta publicar frontend y backend
+(requiere credenciales de Render y Atlas).
 
 | Criterio | Estado |
 |---|---|
