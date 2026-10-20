@@ -1,0 +1,45 @@
+/* ==========================================================================
+   pages.css — estilos de las vistas (rutas)
+   ========================================================================== */
+
+.boards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.kanban-board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+/* En pantallas anchas las columnas se disponen en fila con scroll interno
+   (el scroll horizontal es del tablero, nunca de la página → CA-16) */
+@media (min-width: 720px) {
+  .kanban-board {
+    flex-direction: row;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: var(--space-3);
+  }
+
+  .kanban-board > .column-card {
+    flex: 0 0 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: var(--space-3);
+  }
+
+  .page-header__actions {
+    width: 100%;
+  }
+
+  .page-header__actions .btn {
+    flex: 1;
+  }
+}
