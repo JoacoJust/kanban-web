@@ -137,4 +137,34 @@ La Fase 0 se considera completa cuando:
 - [x] Repo `kanban-web` creado con los 3 documentos originales.
 - [x] Contrato verificado contra el código real del backend.
 - [x] `docs/REVIEW.md` emitido con inconsistencias, ambigüedades, gaps, riesgos y preguntas.
-- [ ] **Aprobación humana** (respuesta "aprobado") con las resoluciones de §8.
+- [x] **Aprobación humana** con las resoluciones de §8 (ver §11).
+
+## 11. Resoluciones aprobadas (Fase 0 → implementación)
+
+Aprobadas por el cliente sin condiciones. Rigen la implementación de las
+Fases 1 a 6:
+
+| # | Pregunta | Resolución aprobada |
+|---|---|---|
+| P-1 | Backend desplegado | El backend se despliega en la **Fase 6** (Render Web Service + Atlas M0). La URL pública queda pendiente hasta contar con credenciales; el frontend consume `VITE_API_URL` sin hardcodear nada. |
+| P-2 | Alcance del rollback (I-1) | **Rollback ante cualquier error** (400, 404, 500 y red), con Toast que muestra el mensaje real del backend. |
+| P-3 | CA-05 con ID malformado (A-1) | Mostrar **el mensaje real del backend** (`error.message`) en el estado de error, con enlace a la lista. |
+| P-4 | Descripción vacía y ubicación de edición (A-2, A-3) | `description: ""` es válido para borrarla; edición y borrado de tablero desde la lista, borrado también desde el detalle (sin formulario de edición duplicado). |
+| P-5 | Commit inicial de Fase 0 | Aprobado tal cual; se avanza a Fase 1 sin más cambios en los documentos fuente. |
+
+### Resoluciones de implementación derivadas
+
+| Tema | Resolución |
+|---|---|
+| Eliminar tablero/columna/ticket | Confirmación explícita previa (ConfirmDialog). Al borrar una columna se informa cuántos tickets se pierden. |
+| Navegación al abrir un tablero | `<Link>` dentro de `BoardCard` en lugar de la prop `onOpen` de SPEC §9, para respetar AGENTS §7/§10.1 (`useNavigate` solo tras una mutación). |
+| Mocks | `VITE_USE_MOCKS=true` activa un adaptador de Axios en memoria con el contrato real (incluye el 404 al mover a una columna inexistente). |
+| Timeout HTTP | 60 s (SPEC §4), con copy “Conectando con el servidor…” tras ~3 s. |
+| Despliegue | Render Static Site para el frontend con rewrite `/* → /index.html`; `render.yaml` incluido. |
+
+### Verificación de los criterios de aceptación
+
+El estado detallado de CA-01 a CA-18 (implementado, verificado con tests o
+pendiente de producción) se mantiene en el `README.md` raíz. **CA-18 queda
+pendiente** hasta publicar backend y frontend, por falta de credenciales de
+Render/Atlas en el entorno de desarrollo.
