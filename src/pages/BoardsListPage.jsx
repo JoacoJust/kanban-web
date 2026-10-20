@@ -98,17 +98,16 @@ export default function BoardsListPage() {
         </div>
       )}
 
-      <BoardForm
-        key="create-board"
-        open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-      />
-      <BoardForm
-        key={editingBoard ? `edit-${editingBoard._id}` : 'edit-none'}
-        open={Boolean(editingBoard)}
-        board={editingBoard}
-        onClose={() => setEditingBoard(null)}
-      />
+      {/* Se montan solo al abrirse: los formularios arrancan con valores limpios */}
+      {isFormOpen && <BoardForm open onClose={() => setIsFormOpen(false)} />}
+      {editingBoard && (
+        <BoardForm
+          key={editingBoard._id}
+          open
+          board={editingBoard}
+          onClose={() => setEditingBoard(null)}
+        />
+      )}
       <ConfirmDialog
         open={Boolean(deletingBoard)}
         title="Eliminar tablero"

@@ -83,7 +83,12 @@ export default function ColumnCard({
           </Button>
         </div>
       </header>
-      <div className="column-card__tickets">{children}</div>
+      <div className="column-card__tickets">
+        {(!children || (Array.isArray(children) && children.length === 0)) && (
+          <p className="column-card__empty">Sin tickets</p>
+        )}
+        {children}
+      </div>
     </section>
   );
 }
