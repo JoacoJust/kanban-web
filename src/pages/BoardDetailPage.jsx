@@ -11,6 +11,7 @@ import ColumnsBoard from '../features/columns/ColumnsBoard.jsx';
 import { useDeleteColumn } from '../features/columns/queries.js';
 import TicketForm from '../features/tickets/TicketForm.jsx';
 import { useDeleteTicket } from '../features/tickets/queries.js';
+import { useMoveTicket } from '../features/tickets/useMoveTicket.js';
 import { useTheme } from '../hooks/useTheme.js';
 import { useToast } from '../hooks/useToast.js';
 import useSlowFlag from '../hooks/useSlowFlag.js';
@@ -27,6 +28,7 @@ export default function BoardDetailPage() {
   const deleteBoard = useDeleteBoard();
   const deleteColumn = useDeleteColumn();
   const deleteTicket = useDeleteTicket();
+  const moveTicket = useMoveTicket(boardId);
   const { theme, toggle } = useTheme();
   const { showToast } = useToast();
   const isSlowLoading = useSlowFlag();
@@ -38,6 +40,29 @@ export default function BoardDetailPage() {
   const [ticketTarget, setTicketTarget] = useState(null); // { columnId } para crear
   const [editingTicket, setEditingTicket] = useState(null);
   const [deletingTicket, setDeletingTicket] = useState(null);
+
+  /**
+   * Mover con el menú "Mover a…" y con drag & drop (SPEC §7).
+   * Soltar sobre la misma columna no llama a la API (SPEC §7.5).
+   */
+  function handleMoveTicket(ticket, toColumnId) {
+    if (!ticket || ticket.column === toColumnId) return;
+    moveTicket.mutate({
+      ticketId: ticket._id,
+      fromColumnId: ticket.column,
+      toColumnId,
+    });
+  }
+
+  function handleDropTicket(toColumnId, payload) {
+    if (!payload?.ticketId || !payload?.fromColumnId) return;
+    if (payload.fromColumnId === toColumnId) return;
+    moveTicket.mutate({
+      ticketId: payload.ticketId,
+      fromColumnId: payload.fromColumnId,
+      toColumnId,
+    });
+  }
 
   function handleDeleteBoard() {
     deleteBoard.mutate(boardId, {
@@ -144,6 +169,11 @@ export default function BoardDetailPage() {
         }
         onEditTicket={(ticket) => setEditingTicket(ticket)}
         onDeleteTicket={(ticket) => setDeletingTicket(ticket)}
+        onMoveTicket={handleMoveTicket}
+        onDropTicket={handleDropTicket}
+        isTicketBusy={(ticketId) =>
+          moveTicket.isPending && moveTicket.variables?.ticketId === ticketId
+        }
       />
 
       {/* ------------------------------ Diálogos ------------------------------ */}
