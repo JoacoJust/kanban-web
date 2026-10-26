@@ -1,0 +1,468 @@
+/* ==========================================================================
+   components.css — estilos de la biblioteca de componentes presentacionales
+   ========================================================================== */
+
+/* ------------------------------ Spinner ------------------------------ */
+
+.spinner {
+  display: inline-block;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+.spinner--sm { width: 14px; height: 14px; }
+.spinner--md { width: 22px; height: 22px; }
+.spinner--lg { width: 36px; height: 36px; border-width: 3px; }
+
+.spinner-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) 0;
+  color: var(--text-muted);
+}
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2s; }
+}
+
+/* ------------------------------ Button ------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+a.btn:hover {
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--accent-color);
+  color: var(--accent-contrast);
+}
+
+.btn--primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.btn--secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  border-color: var(--accent-color);
+}
+
+.btn--danger {
+  background: var(--danger-color);
+  color: var(--danger-contrast);
+}
+
+.btn--danger:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+}
+
+.btn--icon {
+  padding: var(--space-1) var(--space-2);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ------------------------------ Campos (Input/Textarea) ------------------------------ */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.field__label .field__required {
+  color: var(--danger-color);
+}
+
+.field__input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.field__input::placeholder {
+  color: var(--text-muted);
+}
+
+.field__input:focus-visible {
+  border-color: var(--accent-color);
+}
+
+.field--error .field__input {
+  border-color: var(--danger-color);
+  background: var(--danger-bg);
+}
+
+.field__error {
+  color: var(--danger-color);
+  font-size: 0.8rem;
+}
+
+/* ------------------------------ Modal / ConfirmDialog ------------------------------ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--space-4);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-modal);
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-1);
+}
+
+.modal__close:hover {
+  color: var(--text-primary);
+}
+
+.modal__body {
+  padding: var(--space-4);
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border-color);
+}
+
+/* ------------------------------ Toast ------------------------------ */
+
+.toast-viewport {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  left: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 200;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 380px;
+  margin-left: auto;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
+}
+
+.toast--error {
+  border-color: var(--danger-color);
+  background: var(--danger-bg);
+}
+
+.toast--success {
+  border-color: var(--success-color);
+  background: var(--success-bg);
+}
+
+.toast__message {
+  flex: 1;
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.toast__close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.toast__close:hover {
+  color: var(--text-primary);
+}
+
+/* ------------------------------ ThemeToggle ------------------------------ */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* ------------------------------ BoardCard ------------------------------ */
+
+.board-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.board-card__title {
+  font-size: 1.05rem;
+}
+
+.board-card__title::before {
+  content: "> ";
+  color: var(--accent-color);
+}
+
+.board-card__description {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  flex: 1;
+  white-space: pre-wrap;
+}
+
+.board-card__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* ------------------------------ ColumnCard ------------------------------ */
+
+.column-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+
+.column-card--drop-target {
+  border-color: var(--accent-color);
+  background: var(--accent-bg);
+}
+
+.column-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.column-card__name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.column-card__actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.column-card__tickets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 8px;
+}
+
+.column-card__empty {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: var(--space-3) 0;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+/* ------------------------------ TicketCard ------------------------------ */
+
+.ticket-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent-color);
+  border-radius: var(--radius-sm);
+  cursor: grab;
+}
+
+.ticket-card:active {
+  cursor: grabbing;
+}
+
+.ticket-card--busy {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.ticket-card__title {
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.ticket-card__description {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ticket-card__actions {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.ticket-card__menu {
+  position: absolute;
+  top: calc(100% - var(--space-1));
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  z-index: 10;
+  padding: var(--space-1);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ticket-card__menu-label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: var(--space-1) var(--space-2);
+}
+
+.ticket-card__menu-item {
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+}
+
+.ticket-card__menu-item:hover {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+}
+
+@media (max-width: 480px) {
+  .toast-viewport {
+    left: var(--space-2);
+    right: var(--space-2);
+  }
+
+  .toast {
+    max-width: none;
+  }
+}

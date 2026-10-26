@@ -1,0 +1,58 @@
+/* ==========================================================================
+   tokens.css — ÚNICO ARCHIVO DEL PROYECTO CON COLORES HEX/RGB/HSL (AGENTS §10.4)
+   Paleta: Minimalismo Developer (IDE/Terminal). Todos los estilos usan var(--token).
+   Contraste verificado WCAG AA en ambos modos (ver docs/ARCHITECTURE.md).
+   ========================================================================== */
+
+:root {
+  /* --- Obligatorios (AGENTS §8) --- */
+  --bg-primary: #f9fafb;
+  --bg-card: #ffffff;
+  --text-primary: #111827;
+  --text-muted: #6b7280;          /* 4.8:1 sobre #F9FAFB y 4.8:1 sobre blanco → AA */
+  --accent-color: #4f46e5;        /* texto blanco: 6.3:1 → AA */
+  --accent-contrast: #ffffff;
+  --border-color: #e5e7eb;
+  --danger-color: #dc2626;        /* texto blanco: 4.8:1 → AA */
+
+  /* --- Extensiones propias (también verificadas AA) --- */
+  --danger-contrast: #ffffff;     /* texto sobre --danger-color */
+  --success-color: #15803d;       /* 5.0:1 sobre blanco → AA */
+  --danger-bg: rgba(220, 38, 38, 0.08);
+  --accent-bg: rgba(79, 70, 229, 0.08);
+  --success-bg: rgba(21, 128, 61, 0.08);
+  --overlay: rgba(17, 24, 39, 0.55);
+  --shadow: 0 4px 16px rgba(17, 24, 39, 0.08);
+  --shadow-modal: 0 16px 48px rgba(17, 24, 39, 0.25);
+
+  /* --- Tipografía y métricas --- */
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
+
+:root.dark {
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;          /* 5.7:1 sobre --bg-card → AA */
+  --accent-color: #818cf8;        /* texto oscuro obligatorio (AGENTS §8) */
+  --accent-contrast: #0f172a;     /* 6.1:1 sobre #818CF8 → AA */
+  --border-color: #334155;
+  --danger-color: #f87171;        /* 5.3:1 sobre --bg-card → AA */
+  --danger-contrast: #0f172a;     /* 6.6:1 sobre #F87171 → AA */
+  --success-color: #4ade80;       /* 8.4:1 sobre --bg-card → AA */
+  --danger-bg: rgba(248, 113, 113, 0.12);
+  --accent-bg: rgba(129, 140, 248, 0.14);
+  --success-bg: rgba(74, 222, 128, 0.12);
+  --overlay: rgba(2, 6, 23, 0.65);
+  --shadow: 0 4px 16px rgba(2, 6, 23, 0.5);
+  --shadow-modal: 0 16px 48px rgba(2, 6, 23, 0.7);
+}
